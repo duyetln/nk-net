@@ -55,4 +55,32 @@ NKnet::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+  
+  post    '/users' => 'users#create'
+  get     '/users/:id' => 'users#show'
+  put     '/users/:id' => 'users#update'
+  
+  get     '/posts' => 'posts#index'
+  post    '/posts' => 'posts#create'
+  get     '/posts/:id' => 'posts#show'
+  delete  '/posts/:id' => 'posts#destroy'
+  
+  get     '/pictures' => 'pictures#index'
+  post    '/pictures' => 'pictures#create'
+  get     '/pictures/:id' => 'pictures#show'
+  delete  '/pictures/:id' => 'pictures#destroy'
+  
+  post    '/tags' => 'tags#create'
+  put     '/tags/:id' => 'tags#update'
+  delete  'tags/:id' => 'tags#destroy'
+  
+  post    '/taggings' => 'taggings#create'
+  delete  '/taggings/:id' => 'taggings#destroy'
+
+  post    '/comments' => 'comments#create'
+  delete  '/comments' => 'comments#destroy'
+  
+  post    '/user_sessions' => 'user_sessions#create'
+  delete  '/user_sessions' => 'user_sessions#destroy'
+  
 end

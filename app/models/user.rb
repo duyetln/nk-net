@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   Role = {:regular => 1, :admin => 2}
   
   #status
-  Status = {:new => 1, :activated => 2, :deactivated => 4, :suspended => 8}
+  Status = {:new => 1, :activated => 2, :deactivated => 3, :suspended => 4}
 
   #authlogic
   acts_as_authentic
@@ -19,18 +19,21 @@ class User < ActiveRecord::Base
   validates :first_name, :format => {:with => /\A[a-z]{2,}\Z/i }
   validates :last_name, :presence => true
   validates :last_name, :format => {:with => /\A[a-z]{2,}\Z/i }
-  
-  #authlogic will handle these 
-  #validates :email, :presence => true
-  #validates :email, :uniqueness => {:case_sensitive => false}
-  #validates :email, :format => {:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
-  #validates :password, :presence => true
   validates :role, :presence => true
-  validates :role, :inclusion => {:in => Role.values}
+  validates :role, :numericality => {:greater_than => 0, :less_than => (2**(Math::log(Role.values.max,2).floor+1))}
   validates :status, :presence => true
   validates :status, :inclusion => {:in => Status.values}
   
   #access control
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
   
+  def has_role?(role)
+    return false if !Role.keys.include? role
+    self.role & Role[role] > 0
+  end
+  
+  def has_status?(status)
+    return false if !Status.keys.include? status
+    self.status == Status[status]
+  end
 end

@@ -11,6 +11,7 @@ class Comment < ActiveRecord::Base
   validates :user_id, :presence => true
   validates :commentable_id, :presence => true
   validates :commentable_type, :presence => true
+  validates :commentable_type, :inclusion => {:in => [Post.name, Picture.name]}
   
   #access control
   attr_accessible :content

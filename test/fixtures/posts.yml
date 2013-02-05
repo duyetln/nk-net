@@ -1,11 +1,2 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  content: MyString
-  user_id: 1
-  status: 1
-
-two:
-  content: MyString
-  user_id: 1
-  status: 1

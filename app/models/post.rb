@@ -10,6 +10,7 @@ class Post < ActiveRecord::Base
   has_many :comments, :as => :commentable, :dependent => :destroy
   
   #validations
+  validates :content, :presence => true
   validates :user, :presence => true
   validates :user_id, :presence => true
   
