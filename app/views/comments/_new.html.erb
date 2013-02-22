@@ -1,0 +1,12 @@
+<div class="wrapper new-comment">
+  <%= image_tag "question.png", :class => "thumbnail" %>
+  <div class="container">
+    <%= form_for :comment, :url => comments_path do |f| %>
+    <%= f.text_area :content, :class => "textbox content" %>
+    <%= hidden_field_tag :commentable_type, commentable_type %>
+    <%= hidden_field_tag :commentable_id, commentable_id %>
+    <%= f.submit "Comment", :class => "button", :id => "new" %>
+  <% end %>
+  </div>
+  <div class="clear-all"></div>
+</div>

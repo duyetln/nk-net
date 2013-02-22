@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title> Welcome to NKnet</title>
+    <meta charset="utf-8">
+    <%= stylesheet_link_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body class="wrapper">
+    <div id="top-background">
+      <div class="wrapper center holder">
+          <div id="signin">                
+            <%= form_for :user_session, :url => user_sessions_path, :html => {:id => "signin-form"} do |f| %>
+              <table>
+                <tr>
+                  <td><%= f.text_field :email, :class => "textbox", :placeholder => "Email", :size => 15 %></td>
+                  <td><%= f.password_field :password, :class => "textbox", :placeholder => "Password", :size => 15 %></td>
+                  <td><%= f.submit "Log In", :class => "button hover" %></td>
+                </tr>
+              </table>                
+            <% end %>                
+          </div>
+          <div class="clear-all"></div>
+      </div>
+    </div>
+    <div class="wrapper center holder">
+      <div id="signup">
+        <%= form_for :user, :url => users_path, :html => {:id => "signup-form"} do |f| %>
+          <table>
+            <tr>
+              <td class="field">Email</td>
+              <td><%= f.text_field :email, :class => "textbox" %></td>
+            <tr>
+            <tr>
+              <td class="field">First Name</td>
+              <td><%= f.text_field :first_name, :class => "textbox" %></td>
+            </tr>
+            <tr>
+              <td class="field">Last Name</td>
+              <td><%= f.text_field :last_name, :class => "textbox" %></td>
+            </tr>
+            <tr>
+              <td class="field">Password</td>
+              <td><%= f.password_field :password, :class => "textbox" %></td>
+            </tr>
+            <tr>
+              <td class="field">Confirm Password</td>
+              <td><%= f.password_field :password_confirmation, :class => "textbox" %></td>
+            </tr>
+            <tr>
+              <td class="field"></td>
+              <td><%= f.submit "Sign Up", :class => "button hover" %></td>
+            </tr>
+          </table>
+        <% end %>
+      </div>
+      <div class="clear-all"></div>
+    </div>
+  </body>
+</html>

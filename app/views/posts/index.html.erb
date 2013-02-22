@@ -1,0 +1,16 @@
+<% content_for :menu do %>
+  <%= render "shared/menu" %>
+<% end %>
+
+<% content_for :content do %>
+  <div class="posts">
+    <%= render @posts, :shorten => true %>
+  </div>
+  <div class="new-post">
+    <%= form_for :post, :url => posts_path, :html => {:class => "wrapper"} do |f| %>
+      <%= f.text_area :content, :class => "textbox content", :placeholder => "Have something to share?" %>
+      <%= f.submit "Publish", :class => "button", :id => "new" %>
+    <% end %>
+  </div>
+  <div class="clear-all></div>
+<% end %>

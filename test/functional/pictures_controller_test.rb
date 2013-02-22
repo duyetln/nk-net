@@ -8,7 +8,7 @@ class PicturesControllerTest < ActionController::TestCase
   test 'it should not create a picture if no login' do
     picture = fixture_file_upload 'SWAT.jpg'
   
-    post :create, :picture => {:id => 1, :data => picture}
+    post :create, :picture => {:id => 1, :item => picture}
   
     assert Picture.count == 0, 'there must be no picture'
   end
@@ -17,7 +17,7 @@ class PicturesControllerTest < ActionController::TestCase
     UserSession.create(users(:dn)) 
     picture = fixture_file_upload 'SWAT.jpg'
     
-    post :create, :picture => {:id => 1, :data => picture}
+    post :create, :picture => {:id => 1, :item => picture}
     
     picture = Picture.last
     assert !picture.nil?, 'picture must exist'
@@ -28,7 +28,7 @@ class PicturesControllerTest < ActionController::TestCase
     UserSession.create(users(:dn))
     picture = fixture_file_upload 'SWAT.jpg'
     
-    post :create, :picture => {:id => 1, :data => picture}
+    post :create, :picture => {:id => 1, :item => picture}
     delete :destroy, :id => 1
     
     assert Picture.count == 0, 'there must be no picture'

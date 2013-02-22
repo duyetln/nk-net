@@ -10,9 +10,9 @@ class UsersController < ApplicationController
     end
     
     if @user.save
-      render :nothing => true
+      redirect_to posts_path
     else
-      render :nothing => true
+      redirect_to root_path
     end
   end
   

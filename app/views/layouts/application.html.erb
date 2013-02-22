@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>NKnet</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+  <head>
+    <title> Welcome to NKnet</title>
+    <meta charset="utf-8">
+    <%= stylesheet_link_tag "application", "menu", "post", "comment", "picture" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body class="wrapper">
+    <div id="top-background">
+      <div class="wrapper center holder">
+        <div id="logo">Logo</div>
+        <div id="navigation">
+          <%= form_tag posts_path, :method => "GET", :id => "search-form" do %>
+            <%= text_field_tag :q, nil, :class => "textbox control", :id => "search-box" %>
+          <% end %>
+          <%= form_tag user_sessions_path, :method => "DELETE", :id => "logout-form" do %>
+            <%= submit_tag "", :type => :image, :src => asset_path("logout.png"), :class => "control", :id => "logout", :title => "Log Out" %>
+          <% end %> 
+          <%= link_to image_tag("user.png", :class => "control", :id => "profile", :title => "Back to Profile"), user_path(current_user) %>
+          <%= link_to image_tag("home.png", :class => "control", :id => "home", :title => "Back to Home"), root_path %>
+        </div>
+        <div class="clear-all"></div>
+      </div>
+    </div>
+    <div class="wrapper center holder">
+      <div id="menu">
+        <%= yield :menu %>
+      </div>
+      <div id="content">
+        <%= yield :content %>
+      </div>
+      <div class="clear-all"></div>
+    </div>
+  </body>
 </html>

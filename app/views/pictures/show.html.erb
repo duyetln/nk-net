@@ -1,0 +1,32 @@
+<% content_for :menu do %>
+  <%= render "shared/menu" %>
+<% end %>
+
+<% content_for :content do %>
+  <div class="wrapper picture">
+    <%= image_tag @picture.item.url(:original), :class => "thumbnail", :id=>"photo" %>
+    <div class="container">
+      <%= link_to image_tag("question.png", :class => "thumbnail", :id => "owner-avatar"), user_path(@picture.user) %>
+      
+      <div class="owner">
+        <%= link_to @picture.user.name, user_path(@picture.user) %>
+        <% if @picture.user == current_user || current_user.has_role?(:admin) %>
+          <%= form_tag picture_path(@picture), :method => "DELETE", :class => "delete-form" do %>
+            <%= submit_tag "", :type => :image, :src => asset_path("delete.png"), :class => "control", :id => "delete", :title => "Delete This Image" %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="content">
+        <%= @picture.description %>
+      </div>
+      <div class="clear-all"></div>
+    </div>
+  </div>
+  
+  <div class="comments">
+    <%= render :partial => "comments/comment", :collection => @picture.comments, :as => :comment %>
+    <%= render :partial => "comments/new", :locals => {:commentable_type => @picture.class.name, :commentable_id => @picture.id} %> 
+  </div>
+  <div class="clear-all"></div>
+  
+<% end %>

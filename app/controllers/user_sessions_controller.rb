@@ -6,15 +6,15 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-      render :nothing => true
+      redirect_to posts_path
     else
-      render :nothing => true
+      redirect_to root_path
     end
   end
   
   def destroy
     current_user_session.destroy
-    render :nothing => true
+    redirect_to root_path
   end
 
 end

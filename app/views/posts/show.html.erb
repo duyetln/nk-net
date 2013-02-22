@@ -1,0 +1,12 @@
+<% content_for :menu do %>
+  <%= render "shared/menu" %>
+<% end %>
+
+<% content_for :content do %>
+  <%= render @post, :shorten => false %>
+  <div class="comments">
+    <%= render :partial => "comments/comment", :collection => @post.comments, :as => :comment %>
+    <%= render :partial => "comments/new", :locals => {:commentable_type => @post.class.name, :commentable_id => @post.id} %> 
+  </div>
+  <div class="clear-all"></div>
+<% end %>

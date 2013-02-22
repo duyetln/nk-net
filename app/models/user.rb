@@ -24,6 +24,9 @@ class User < ActiveRecord::Base
   validates :status, :presence => true
   validates :status, :inclusion => {:in => Status.values}
   
+  #callbacks
+  before_save :clean_name
+  
   #access control
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
   
@@ -35,5 +38,16 @@ class User < ActiveRecord::Base
   def has_status?(status)
     return false if !Status.keys.include? status
     self.status == Status[status]
+  end
+  
+  def name
+    self.first_name + ' ' + self.last_name
+  end
+  
+  private
+  
+  def clean_name
+    self.first_name = self.first_name.strip.capitalize
+    self.last_name = self.last_name.strip.capitalize
   end
 end

@@ -7,18 +7,18 @@ class CommentsController < ApplicationController
     @comment.commentable_type = params[:commentable_type]
     
     if @comment.save
-      render :nothing => true
+      redirect_to :back
     else
-      render :nothing => true
+      redirect_to :back
     end
   end
   
   def destroy
     @comment = Comment.find(params[:id])
     if (@comment.user == current_user || current_user.has_role?(:admin)) && @comment.destroy
-      render :nothing => true
+      redirect_to :back
     else
-      render :nothing => true
+      redirect_to :back
     end
   end
   

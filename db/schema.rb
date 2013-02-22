@@ -23,13 +23,16 @@ ActiveRecord::Schema.define(:version => 20121228235000) do
   end
 
   create_table "pictures", :force => true do |t|
+    t.string   "description"
+    t.integer  "width"
+    t.integer  "height"
     t.integer  "user_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
-    t.string   "data_file_name"
-    t.string   "data_content_type"
-    t.integer  "data_file_size"
-    t.datetime "data_updated_at"
+    t.string   "item_file_name"
+    t.string   "item_content_type"
+    t.integer  "item_file_size"
+    t.datetime "item_updated_at"
   end
 
   create_table "posts", :force => true do |t|
