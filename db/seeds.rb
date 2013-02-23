@@ -6,17 +6,17 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-user = User.new({:id=>1,:first_name=>"ddd", :last_name=>"nnn", :email=>"abc@domain.com", :password=>"123456",:password_confirmation=>"123456"})
+user = User.new({:id=>1,:first_name=>"Tony", :last_name=>"Stark", :email=>"abc@domain.com", :password=>"123456",:password_confirmation=>"123456"})
 user.status = User::Status[:activated]
 user.role = User::Role[:admin]
 user.save
 
-user = User.new({:id=>2,:first_name=>"lll", :last_name=>"nnn", :email=>"def@domain.com", :password=>"123456",:password_confirmation=>"123456"})
+user = User.new({:id=>2,:first_name=>"Steve", :last_name=>"Rogers", :email=>"def@domain.com", :password=>"123456",:password_confirmation=>"123456"})
 user.status = User::Status[:activated]
 user.role = User::Role[:regular]
 user.save
 
-user = User.new({:id=>3,:first_name=>"ccc", :last_name=>"nnn", :email=>"ghi@domain.com", :password=>"123456",:password_confirmation=>"123456"})
+user = User.new({:id=>3,:first_name=>"Bruce", :last_name=>"Banner", :email=>"ghi@domain.com", :password=>"123456",:password_confirmation=>"123456"})
 user.status = User::Status[:new]
 user.role = User::Role[:regular]
 user.save
