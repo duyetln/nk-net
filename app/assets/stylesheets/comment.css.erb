@@ -43,12 +43,18 @@
   float:right;
 }
 
-.comment .delete-form
+.comment .toolbar .tool
 {
+  visibility:hidden;
   float:right;
 }
 
-.comment .control#delete
+.comment .toolbar:hover .tool
+{
+  visibility:visible;
+}
+
+.comment .toolbar #delete
 {
   width:16px;
   height:16px;

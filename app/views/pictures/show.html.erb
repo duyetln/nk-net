@@ -8,12 +8,14 @@
     <div class="container">
       <%= link_to image_tag("question.png", :class => "thumbnail", :id => "owner-avatar"), user_path(@picture.user) %>
       
-      <div class="owner">
+      <div class="owner toolbar">
         <h4><%= link_to @picture.user.name, user_path(@picture.user) %></h4>
         <% if @picture.user == current_user || current_user.has_role?(:admin) %>
-          <%= form_tag picture_path(@picture), :method => "DELETE", :class => "delete-form" do %>
+          <%= form_tag picture_path(@picture), :method => "DELETE", :class => "tool" do %>
             <%= submit_tag "", :type => :image, :src => asset_path("delete.png"), :class => "control", :id => "delete", :title => "Delete This Image" %>
           <% end %>
+        <% else %>
+          <%= image_tag "delete.png", :class => "tool deactivated", :id => "delete" %>
         <% end %>
       </div>
       <div class="content">

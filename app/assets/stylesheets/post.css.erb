@@ -25,12 +25,18 @@
   margin-bottom:30px;
 }
 
-.post .delete-form
+.post .toolbar .tool
 {
+  visibility:hidden;
   float:right;
 }
 
-.post .control#delete
+.post .toolbar:hover .tool
+{
+  visibility:visible;
+}
+
+.post .toolbar #delete
 {
   width:16px;
   height:16px;

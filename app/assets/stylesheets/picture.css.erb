@@ -62,12 +62,18 @@
   float:right;
 }
 
-.picture .delete-form
+.picture .toolbar .tool
 {
+  visibility:hidden;
   float:right;
 }
 
-.picture .control#delete
+.picture .toolbar:hover .tool
+{
+  visibility:visible;
+}
+
+.picture .toolbar #delete
 {
   width:16px;
   height:16px;

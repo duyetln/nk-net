@@ -1,12 +1,14 @@
 <div class="wrapper comment">
   <%= link_to image_tag("question.png", :class => "thumbnail deactivated"), user_path(comment.user) %>
   <div class="container">
-    <div class="owner">
+    <div class="owner toolbar">
       <h4><%= link_to comment.user.name, user_path(comment.user) %></h4>
       <% if comment.user == current_user || current_user.has_role?(:admin) %>
-        <%= form_tag comment_path(comment), :method => "DELETE", :class => "delete-form" do %>
+        <%= form_tag comment_path(comment), :method => "DELETE", :class => "tool" do %>
           <%= submit_tag "", :type => :image, :src => asset_path("delete.png"), :class => "control", :id => "delete", :title => "Delete This Comment" %>
         <% end %>
+      <% else %>
+        <%= image_tag "delete.png", :class => "tool deactivated", :id => "delete" %>
       <% end %>
       <div class="clear-all"></div>
     </div>
