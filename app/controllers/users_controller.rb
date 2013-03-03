@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    render :nothing => true
+    redirect_to user_posts_path(@user)
   end
   
   def update

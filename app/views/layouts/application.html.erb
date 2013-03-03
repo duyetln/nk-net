@@ -3,7 +3,7 @@
   <head>
     <title> Welcome to NKnet</title>
     <meta charset="utf-8">
-    <%= stylesheet_link_tag "application", "menu", "post", "comment", "picture" %>
+    <%= stylesheet_link_tag "application", "menu", "post", "comment", "picture", "user" %>
     <%= csrf_meta_tags %>
   </head>
   <body class="wrapper">
@@ -24,11 +24,11 @@
       </div>
     </div>
     <div class="wrapper center holder">
-      <div id="menu">
-        <%= yield :menu %>
+      <div id="left-content">
+        <%= yield :lcontent %>
       </div>
-      <div id="content">
-        <%= yield :content %>
+      <div id="right-content">
+        <%= yield :rcontent %>
       </div>
       <div class="clear-all"></div>
     </div>

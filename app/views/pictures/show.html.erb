@@ -1,8 +1,8 @@
-<% content_for :menu do %>
+<% content_for :lcontent do %>
   <%= render "shared/menu" %>
 <% end %>
 
-<% content_for :content do %>
+<% content_for :rcontent do %>
   <div class="wrapper picture">
     <%= image_tag @picture.item.url(:original), :class => "thumbnail", :id=>"photo" %>
     <div class="container">

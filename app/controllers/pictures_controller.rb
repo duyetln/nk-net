@@ -1,7 +1,13 @@
 class PicturesController < ApplicationController
 
   def index
-    @pictures = Picture.order("created_at DESC")
+    if params[:user_id].nil?
+      @user = nil
+      @pictures = Picture.order("created_at DESC")
+    else
+      @user = User.find(params[:user_id])
+      @pictures = @user.pictures.order("created_at DESC")
+    end
   end
   
   def create

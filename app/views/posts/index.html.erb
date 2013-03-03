@@ -1,16 +1,22 @@
-<% content_for :menu do %>
-  <%= render "shared/menu" %>
+<% content_for :lcontent do %>
+  <% if @user %>
+    <%= render :partial => "users/user", :locals => {:user => @user} %>
+  <% else %>
+    <%= render "shared/menu" %>
+  <% end %>
 <% end %>
 
-<% content_for :content do %>
+<% content_for :rcontent do %>
   <div class="posts">
     <%= render @posts, :shorten => true %>
   </div>
-  <div class="new-post">
-    <%= form_for :post, :url => posts_path, :html => {:class => "wrapper"} do |f| %>
-      <%= f.text_area :content, :class => "textbox content", :placeholder => "Have something to share?" %>
-      <%= f.submit "Publish", :class => "button", :id => "new" %>
-    <% end %>
-  </div>
+  <% if @user.nil? || current_user == @user %>
+    <div class="new-post">
+      <%= form_for :post, :url => posts_path, :html => {:class => "wrapper"} do |f| %>
+        <%= f.text_area :content, :class => "textbox content", :placeholder => "Have something to share?" %>
+        <%= f.submit "Publish", :class => "button", :id => "new" %>
+      <% end %>
+    </div>
+  <% end %>
   <div class="clear-all></div>
 <% end %>

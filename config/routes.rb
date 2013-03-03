@@ -10,11 +10,13 @@ NKnet::Application.routes.draw do
   
   get     '/posts' => 'posts#index', :as => 'posts'
   post    '/posts' => 'posts#create'
+  get     '/users/:user_id/posts' => 'posts#index', :as => 'user_posts'
   get     '/posts/:id' => 'posts#show', :as => 'post'
   delete  '/posts/:id' => 'posts#destroy'
   
   get     '/pictures' => 'pictures#index', :as => 'pictures'
   post    '/pictures' => 'pictures#create'
+  get     '/users/:user_id/pictures' => 'pictures#index', :as => 'user_pictures'
   get     '/pictures/:id' => 'pictures#show', :as => 'picture'
   delete  '/pictures/:id' => 'pictures#destroy'
   

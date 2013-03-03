@@ -1,8 +1,12 @@
-<% content_for :menu do %>
-  <%= render "shared/menu" %>
+<% content_for :lcontent do %>
+  <% if @user %>
+    <%= render :partial => "users/user", :locals => {:user => @user} %>
+  <% else %>
+    <%= render "shared/menu" %>
+  <% end %>
 <% end %>
 
-<% content_for :content do %>
+<% content_for :rcontent do %>
   <% first = [] %>
   <% second = [] %>
   <% third = [] %>
@@ -25,11 +29,13 @@
     <div class="clear-all"></div>
   </div>
   
-  <div class="new-picture">
-    <%= form_for :picture, :url => pictures_path, :html => { :multipart => true } do |f| %>
-      <%= f.text_area :description, :class => "textbox content", :placeholder => "What is this picture about?" %>
-      <%= f.submit "Upload Picture", :class => "button", :id => "new" %>
-      <%= f.file_field :item %>
-    <% end %>
-  </div>
+  <% if @user.nil? || current_user == @user %>
+    <div class="new-picture">
+      <%= form_for :picture, :url => pictures_path, :html => { :multipart => true } do |f| %>
+        <%= f.text_area :description, :class => "textbox content", :placeholder => "What is this picture about?" %>
+        <%= f.submit "Upload Picture", :class => "button", :id => "new" %>
+        <%= f.file_field :item %>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
