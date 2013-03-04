@@ -1,13 +1,7 @@
 class PostsController < ApplicationController
 
   def index
-    if params[:user_id].nil?
-      @user = nil
-      @posts = Post.order("created_at DESC")
-    else
-      @user = User.find(params[:user_id])
-      @posts = @user.posts.order("created_at DESC")
-    end
+    @posts = Post.order("created_at DESC")
   end
   
   def create

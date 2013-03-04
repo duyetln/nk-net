@@ -6,17 +6,17 @@ NKnet::Application.routes.draw do
   
   post    '/users' => 'users#create', :as => 'users'
   get     '/users/:id' => 'users#show', :as => 'user'
+  get     '/users/:id/posts' => 'users#posts', :as => 'user_posts'
+  get     '/users/:id/pictures' => 'users#pictures', :as => 'user_pictures'
   put     '/users/:id' => 'users#update'
   
   get     '/posts' => 'posts#index', :as => 'posts'
   post    '/posts' => 'posts#create'
-  get     '/users/:user_id/posts' => 'posts#index', :as => 'user_posts'
   get     '/posts/:id' => 'posts#show', :as => 'post'
   delete  '/posts/:id' => 'posts#destroy'
   
   get     '/pictures' => 'pictures#index', :as => 'pictures'
   post    '/pictures' => 'pictures#create'
-  get     '/users/:user_id/pictures' => 'pictures#index', :as => 'user_pictures'
   get     '/pictures/:id' => 'pictures#show', :as => 'picture'
   delete  '/pictures/:id' => 'pictures#destroy'
   

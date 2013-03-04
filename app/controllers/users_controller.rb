@@ -21,6 +21,16 @@ class UsersController < ApplicationController
     redirect_to user_posts_path(@user)
   end
   
+  def posts
+    @user = User.find(params[:id])
+    @posts = @user.posts.order("created_at DESC")
+  end
+  
+  def pictures
+    @user = User.find(params[:id])
+    @pictures = @user.pictures.order("created_at DESC")
+  end
+  
   def update
     @user = User.find(params[:id])
     if @user == current_user

@@ -1,0 +1,7 @@
+<div class="new-picture">
+  <%= form_for :picture, :url => pictures_path, :html => { :multipart => true } do |f| %>
+    <%= f.text_area :description, :class => "textbox content", :placeholder => "What is this picture about?" %>
+    <%= f.submit "Upload Picture", :class => "button", :id => "new" %>
+    <%= f.file_field :item %>
+  <% end %>
+</div>

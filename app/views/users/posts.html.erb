@@ -1,9 +1,11 @@
 <% content_for :lcontent do %>
-  <%= render "shared/menu" %>
+  <%= render @user %>
 <% end %>
 
 <% content_for :rcontent do %>
   <%= render :partial => "posts/posts", :locals => {:posts => @posts} %>
-  <%= render "posts/new" %>
+  <% if current_user == @user %>
+    <%= render "posts/new" %>
+  <% end %>
   <div class="clear-all"></div>
 <% end %>
