@@ -26,7 +26,7 @@
   </div>
   
   <div class="comments">
-    <%= render :partial => "comments/comment", :collection => @picture.comments, :as => :comment %>
+    <%= render :partial => "comments/comment", :collection => @comments, :as => :comment %>
     <%= render :partial => "comments/new", :locals => {:commentable_type => @picture.class.name, :commentable_id => @picture.id} %> 
   </div>
   <div class="clear-all"></div>
