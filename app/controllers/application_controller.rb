@@ -30,13 +30,13 @@ class ApplicationController < ActionController::Base
   end
   
   def require_activated_user
-    unless current_user.has_status?(:activated)
+    unless current_user.activated?
       render :nothing => true
     end
   end
   
   def require_admin_user
-    unless current_user.has_role?(:admin)
+    unless current_user.admin?
       render :nothing => true
     end
   end

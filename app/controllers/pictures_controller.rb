@@ -2,7 +2,7 @@ class PicturesController < ApplicationController
 
   def index
     @pictures = Picture.order("created_at DESC")
-    @pictures = @pictures.select{|picture| picture.user.has_status?(:activated)} if !current_user.has_role?(:admin)
+    @pictures = @pictures.select{|picture| picture.user.activated?} if !current_user.admin?
   end
   
   def create
@@ -18,14 +18,14 @@ class PicturesController < ApplicationController
   
   def show
     @picture = Picture.find(params[:id])
-    redirect_to pictures_path if !current_user.has_role?(:admin) && !@picture.user.has_role?(:activated)
-    @comments = @picture.comments.select{|comment| comment.user.has_status?(:activated)}
+    redirect_to pictures_path if !current_user.admin? && !@picture.user.activated?
+    @comments = @picture.comments.select{|comment| comment.user.activated?}
   end
   
   def destroy
     @picture = Picture.find(params[:id])
     
-    if (@picture.user == current_user || current_user.has_role?(:admin)) && @picture.destroy
+    if (@picture.user == current_user || current_user.admin?) && @picture.destroy
       render :nothing => true
     else
       render :nothing => true

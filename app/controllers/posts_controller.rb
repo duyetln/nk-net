@@ -2,7 +2,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.order("created_at DESC")
-    @posts = @posts.select{|post| post.user.has_status?(:activated)} if !current_user.has_role?(:admin)
+    @posts = @posts.select{|post| post.user.activated?} if !current_user.admin?
   end
   
   def create
@@ -18,14 +18,14 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:id])
-    redirect_to posts_path if !current_user.has_role?(:admin) && !@post.user.has_role?(:activated)
-    @comments = @post.comments.select{|comment| comment.user.has_status?(:activated)}
+    redirect_to posts_path if !current_user.admin? && !@post.user.activated?
+    @comments = @post.comments.select{|comment| comment.user.activated?}
   end
   
   def destroy
     @post = Post.find(params[:id])
     
-    if (@post.user == current_user || current_user.has_role?(:admin)) && @post.destroy
+    if (@post.user == current_user || current_user.admin?) && @post.destroy
       redirect_to posts_path
     else
       redirect_to posts_path

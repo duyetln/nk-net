@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   #types
-  Role = {:regular => 1, :admin => 2}
+  Role =  {:regular => 0, :admin => 1}
   
   #status
   Status = {:new => 1, :activated => 2, :deactivated => 3, :suspended => 4}
@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   validates :last_name, :presence => true
   validates :last_name, :format => {:with => /\A[a-z]{2,}\Z/i }
   validates :role, :presence => true
-  validates :role, :numericality => {:greater_than => 0, :less_than => (2**(Math::log(Role.values.max,2).floor+1))}
+  validates :role, :numericality => {:greater_than_or_equal_to => 0, :less_than => (2**(Math::log(Role.values.max,2).floor+1))}
   validates :status, :presence => true
   validates :status, :inclusion => {:in => Status.values}
   
@@ -35,9 +35,37 @@ class User < ActiveRecord::Base
     self.role & Role[role] > 0
   end
   
+  def has_no_role?
+    self.role == 0
+  end
+  
+  def admin?
+    self.has_role?(:admin)
+  end
+  
+  def regular?
+    self.has_no_role?
+  end
+  
   def has_status?(status)
     return false if !Status.keys.include? status
     self.status == Status[status]
+  end
+  
+  def new?
+    self.has_status?(:new)
+  end
+  
+  def activated?
+    self.has_status?(:activated)
+  end
+  
+  def deactivated?
+    self.has_status?(:deactivated)
+  end
+  
+  def suspended?
+    self.has_status?(:suspended)
   end
   
   def name

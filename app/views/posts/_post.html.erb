@@ -3,7 +3,7 @@
   <div class="container">
     <div class="owner toolbar">
       <h3><%= link_to post.user.name, user_path(post.user) %></h3>
-      <% if post.user == current_user || current_user.has_role?(:admin) %>
+      <% if post.user == current_user || current_user.admin? %>
         <%= form_tag post_path(post), :method => "DELETE", :class => "tool" do %>
           <%= submit_tag "", :type => :image, :src => asset_path("delete.png"), :class => "control", :id => "delete", :title => "Delete This Post" %>
         <% end %>

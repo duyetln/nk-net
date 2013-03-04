@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
   
   def destroy
     @comment = Comment.find(params[:id])
-    if (@comment.user == current_user || current_user.has_role?(:admin)) && @comment.destroy
+    if (@comment.user == current_user || current_user.admin?) && @comment.destroy
       redirect_to :back
     else
       redirect_to :back

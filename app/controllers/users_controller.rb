@@ -27,13 +27,13 @@ class UsersController < ApplicationController
   
   def posts
     @user = User.find(params[:id])
-    redirect_to posts_path if !current_user.has_role?(:admin) && !@user.has_status?(:activated)
+    redirect_to posts_path if !current_user.admin? && !@user.activated?
     @posts = @user.posts.order("created_at DESC")
   end
   
   def pictures
     @user = User.find(params[:id])
-    redirect_to pictures_path if !current_user.has_role?(:admin) && !@user.has_status?(:activated)
+    redirect_to pictures_path if !current_user.admin? && !@user.activated?
     @pictures = @user.pictures.order("created_at DESC")
   end
   
@@ -59,10 +59,10 @@ class UsersController < ApplicationController
   private
   
   def create_user_by_admin
-    if current_user && current_user.has_status?(:activated) && current_user.has_role?(:admin)
+    if current_user && current_user.activated? && current_user.admin?
       @user = User.new(params[:user])
       @user.status = params[:status]
-      @user.role = params[:roles] #BUG HERE; should do an OR operation
+      @user.role = params[:roles] #overwrite
     end
   end
   
