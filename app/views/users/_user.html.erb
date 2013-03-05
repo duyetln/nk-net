@@ -1,6 +1,6 @@
 <div class="wrapper user">
   <%= image_tag "question.png", :class => "thumbnail" %>
-  <div class="container" id="links">
+  <div id="links">
     <%= link_to image_tag("post.png", :class => "control", :title => "Uploaded posts"), user_posts_path(user) %>
     <%= link_to image_tag("picture.png", :class => "control", :title => "Uploaded pictures"), user_pictures_path(user) %>
     <% if current_user == user %>
@@ -10,7 +10,7 @@
     <% end %>    
   </div>
   <div class="clear-all"></div>  
-  <div class="container" id="info">
+  <div id="info">
     <h2><%= user.name %></h2>
     <div class="stats">
       <%= user.email %></br>
@@ -21,25 +21,31 @@
   </div>
   
   <% if current_user.admin? && current_user != user %>
-    <div class="container" id="admin">
-      <% if user.activated? %>      
-        <%= form_tag user_status_path(user), :method => :put do %>
-          <%= hidden_field_tag :status, User::Status[:suspended] %>
-          <%= submit_tag "Suspend", :class => "button hover" %></td>
+    <div id="admin">
+      <div id="status">
+        <% if user.activated? %>      
+          <%= form_tag user_status_path(user), :method => :put do %>
+            <%= hidden_field_tag :status, User::Status[:suspended] %>
+            <%= submit_tag "Suspend", :class => "button hover" %></td>
+          <% end %>
+        <% else %>
+          <%= form_tag user_status_path(user), :method => :put do %>
+            <%= hidden_field_tag :status, User::Status[:activated] %>
+            <%= submit_tag "Activate", :class => "button hover" %></td>
+          <% end %>
         <% end %>
-      <% else %>
-        <%= form_tag user_status_path(user), :method => :put do %>
-          <%= hidden_field_tag :status, User::Status[:activated] %>
-          <%= submit_tag "Activate", :class => "button hover" %></td>
-        <% end %>
-      <% end %>
+      </div>
       
-      <%= form_tag user_role_path(user), :method => :put do %>
-        <% User::Role.keys.reject{|key| key == :regular}.each do |key| %>
-          <%= key.to_s %><%= check_box_tag "roles[]", key, user.have_role?(key) %></br>
+      <div id="role">
+        <%= form_tag user_role_path(user), :method => :put do %>
+          <div id="roles">
+            <% User::Role.keys.reject{|key| key == :regular}.each do |key| %>
+              <%= key.to_s.capitalize %><%= check_box_tag "roles[]", key, user.have_role?(key) %></br>
+            <% end %>
+          </div>
+          <%= submit_tag "Grant", :class => "button hover", :id => "grant-roles" %>
         <% end %>
-        <%= submit_tag "Grant", :class => "button hover" %>
-      <% end %>
+      </div>
     </div>
   <% end %>
 </div> 

@@ -4,8 +4,8 @@
 
 <% content_for :rcontent do %>
   <div class="wrapper user">
-    <div class="container" id="edit">
-      <div class="container" id="password">
+    <div id="edit">
+      <div id="password">
         <%= form_for :user, :url => user_password_path(@user), :method => :put do |f| %>
           <table>
             <tr>
@@ -23,7 +23,7 @@
           </table>
         <% end %>
       </div>
-      <div class="container" id="status">
+      <div id="status">
         <%= form_tag user_status_path(@user), :method => :put do %>
           <%= hidden_field_tag :status, User::Status[:deactivated] %>
           <table>
