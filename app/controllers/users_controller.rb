@@ -21,9 +21,15 @@ class UsersController < ApplicationController
     redirect_to user_posts_path(@user)
   end
   
+  def edit
+    @user = User.find(params[:id])
+    redirect_to user_path(@user) and return unless current_user == @user
+  end
+  
   #Visibility Policy:
   #An admin can see any post/picture and profile page of any user regardless of this user's status
   #A regular user can only see any post/picture and profile page of any activated user
+  #Exception: the edit page can be accessed only by owner
   
   def posts
     @user = User.find(params[:id])
@@ -37,6 +43,36 @@ class UsersController < ApplicationController
     @pictures = @user.pictures.order("created_at DESC")
   end
   
+  def update_status
+    @user = User.find(params[:id])
+    redirect_to user_path(@user) and return unless current_user == @user || current_user.admin?
+    @user.set_status(User::Status.key(params[:status].to_i))
+    
+    if current_user == @user && @user.deactivated?
+      current_user_session.destroy
+      redirect_to root_path
+    else
+      redirect_to user_path(@user)
+    end
+  end
+  
+  def update_role
+    @user = User.find(params[:id])
+    redirect_to user_path(@user) and return unless current_user.admin?
+    params[:roles] = [:regular.to_s] if params[:roles].nil?
+    @user.overwrite_roles(params[:roles].compact.map{|role| role.to_sym})
+    redirect_to user_path(@user)
+  end
+  
+  def update_password
+    @user = User.find(params[:id])
+    redirect_to user_path(@user) and return unless current_user == @user
+    @user.attributes = params[:user]
+    @user.save
+    redirect_to user_path(@user)
+  end
+  
+  
   def update
     @user = User.find(params[:id])
     if @user == current_user
@@ -44,15 +80,15 @@ class UsersController < ApplicationController
       @user.status = params[:status]
     end
     
-    if current_user.has_role?(:admin)
+    if current_user.admin?
       @user.role = params[:roles]
       @user.status = params[:status]
     end
     
     if @user.save!
-      render :nothing => true
+      redirect_to user_path(@user)
     else
-      render :nothing => true
+      redirect_to user_path(@user)
     end 
   end
   

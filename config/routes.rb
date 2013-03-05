@@ -8,9 +8,12 @@ NKnet::Application.routes.draw do
   
     post    '/users' => 'users#create', :as => 'users'
     get     '/users/:id' => 'users#show', :as => 'user'
+    get     '/users/:id/edit' => 'users#edit', :as => 'user_edit'
     get     '/users/:id/posts' => 'users#posts', :as => 'user_posts'
     get     '/users/:id/pictures' => 'users#pictures', :as => 'user_pictures'
-    put     '/users/:id' => 'users#update'
+    put     '/users/:id/status' => 'users#update_status', :as => 'user_status'
+    put     '/users/:id/role' => 'users#update_role', :as => 'user_role'
+    put     '/users/:id/password' => 'users#update_password', :as => 'user_password'
     
     get     '/posts' => 'posts#index', :as => 'posts'
     post    '/posts' => 'posts#create'

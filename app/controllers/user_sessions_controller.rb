@@ -5,11 +5,11 @@ class UserSessionsController < ApplicationController
 
   def create
     @user_session = UserSession.new(params[:user_session])
-    if @user_session.save
-      redirect_to posts_path
-    else
-      redirect_to root_path
-    end
+    redirect_to root_path unless @user_session.save
+    
+    user = @user_session.user
+    user.activate if user.deactivated?
+    redirect_to posts_path if user.activated?
   end
   
   def destroy

@@ -1,0 +1,39 @@
+<% content_for :lcontent do %>
+  <%= render @user %>
+<% end %>
+
+<% content_for :rcontent do %>
+  <div class="wrapper user">
+    <div class="container" id="edit">
+      <div class="container" id="password">
+        <%= form_for :user, :url => user_password_path(@user), :method => :put do |f| %>
+          <table>
+            <tr>
+              <td class="field">New Password</td>
+              <td><%= f.password_field :password, :class => "textbox" %></td>
+            </tr>
+            <tr>
+              <td class="field">Confirm Password</td>
+              <td><%= f.password_field :password_confirmation, :class => "textbox" %></td>
+            </tr>
+            <tr>
+              <td class="field"></td>
+              <td><%= f.submit "Update", :class => "button hover" %></td>
+            </tr>
+          </table>
+        <% end %>
+      </div>
+      <div class="container" id="status">
+        <%= form_tag user_status_path(@user), :method => :put do %>
+          <%= hidden_field_tag :status, User::Status[:deactivated] %>
+          <table>
+            <tr>
+              <td class="field">Deactivate Account</td>
+              <td><%= submit_tag "Deactivate", :class => "button hover" %></td>
+            </tr>
+          </table>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
