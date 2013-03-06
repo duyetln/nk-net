@@ -150,3 +150,69 @@ picture.user_id = 1
 picture.item = File.new("test/fixtures/seed.jpg","r")
 picture.save
 
+Tag.create({:id=>1, :value=>"Important"})
+Tag.create({:id=>2, :value=>"Trivial"})
+Tag.create({:id=>3, :value=>"Fun"})
+Tag.create({:id=>4, :value=>"Event"})
+Tag.create({:id=>5, :value=>"Contest"})
+
+tagging = Tagging.new
+tagging.tag_id = 1
+tagging.taggable_id = 2
+tagging.taggable_type = Post.name
+tagging.save
+
+tagging = Tagging.new
+tagging.tag_id = 1
+tagging.taggable_id = 3
+tagging.taggable_type = Post.name
+tagging.save
+
+tagging = Tagging.new
+tagging.tag_id = 1
+tagging.taggable_id = 1
+tagging.taggable_type = Post.name
+tagging.save
+
+tagging = Tagging.new
+tagging.tag_id = 1
+tagging.taggable_id = 13
+tagging.taggable_type = Picture.name
+tagging.save
+
+tagging = Tagging.new
+tagging.tag_id = 1
+tagging.taggable_id = 12
+tagging.taggable_type = Picture.name
+tagging.save
+
+tagging = Tagging.new
+tagging.tag_id = 1
+tagging.taggable_id = 8
+tagging.taggable_type = Picture.name
+tagging.save
+
+tagging = Tagging.new
+tagging.tag_id = 1
+tagging.taggable_id = 17
+tagging.taggable_type = Picture.name
+tagging.save
+
+tagging = Tagging.new
+tagging.tag_id = 1
+tagging.taggable_id = 9
+tagging.taggable_type = Picture.name
+tagging.save
+
+tagging = Tagging.new
+tagging.tag_id = 3
+tagging.taggable_id = 4
+tagging.taggable_type = Post.name
+tagging.save
+
+tagging = Tagging.new
+tagging.tag_id = 3
+tagging.taggable_id = 5
+tagging.taggable_type = Picture.name
+tagging.save
+

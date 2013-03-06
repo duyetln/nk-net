@@ -25,8 +25,10 @@ NKnet::Application.routes.draw do
     get     '/pictures/:id' => 'pictures#show', :as => 'picture'
     delete  '/pictures/:id' => 'pictures#destroy'
     
-    post    '/tags' => 'tags#create', :as => 'tags'
-    put     '/tags/:id' => 'tags#update', :as => 'tag'
+    get     '/tags' => 'tags#index', :as => 'tags'
+    post    '/tags' => 'tags#create'
+    get     '/tags/:id' => 'tags#show', :as => 'tag'
+    put     '/tags/:id' => 'tags#update'
     delete  '/tags/:id' => 'tags#destroy'
     
     post    '/taggings' => 'taggings#create', :as => 'taggings'

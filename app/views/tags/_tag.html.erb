@@ -1,0 +1,8 @@
+<span class="wrapper tag toolbar">
+  <%= link_to tag.value, tag_path(tag) %>
+  <% if current_user.admin? %>
+    <%= form_tag tag_path(tag), :method => :delete, :class => "tool" do %>
+      <%= submit_tag "", :type => :image, :src => asset_path("delete.png"), :class => "control", :id => "delete", :title => "Delete This Tag" %>
+    <% end %>
+  <% end %>
+</span>

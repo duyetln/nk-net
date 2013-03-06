@@ -31,13 +31,13 @@ class ApplicationController < ActionController::Base
   
   def require_activated_user
     unless current_user.activated?
-      render :nothing => true
+      redirect_to root_path
     end
   end
   
   def require_admin_user
     unless current_user.admin?
-      render :nothing => true
+      redirect_to root_path
     end
   end
   

@@ -1,0 +1,11 @@
+<% content_for :lcontent do %>
+  <%= render "shared/menu" %>
+<% end %>
+
+<% content_for :rcontent do %>
+  <%= render :partial => "tags/tags", :locals => {:tags => @tags} %>
+  <% if current_user.admin? %>
+    <%= render "tags/new" %>
+  <% end %>
+  <div class="clear-all"></div>
+<% end %>

@@ -1,0 +1,18 @@
+<% content_for :lcontent do %>
+  <%= render "shared/menu" %>
+<% end %>
+
+<% content_for :rcontent do %>
+  <div class="wrapper tag">
+    <% if current_user.admin? %>
+      <div id="edit">
+        <%= form_for :tag, :url => tag_path(@tag), :method => :put do |f| %>
+          <%= f.text_field :value, :class => "textbox" %>
+          <%= f.submit "Change", :class => "button", :id => "edit" %>
+        <% end %>
+      </div>
+    <% end %>
+    <%= render :partial => "posts/posts", :locals => {:posts => @posts} %>
+    <%= render :partial => "pictures/pictures", :locals => {:pictures => @pictures} %>
+  </div>
+<% end %>

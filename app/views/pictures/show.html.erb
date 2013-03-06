@@ -11,7 +11,7 @@
       <div class="owner toolbar">
         <h4><%= link_to @picture.user.name, user_path(@picture.user) %></h4>
         <% if @picture.user == current_user || current_user.admin? %>
-          <%= form_tag picture_path(@picture), :method => "DELETE", :class => "tool" do %>
+          <%= form_tag picture_path(@picture), :method => :delete, :class => "tool" do %>
             <%= submit_tag "", :type => :image, :src => asset_path("delete.png"), :class => "control", :id => "delete", :title => "Delete This Image" %>
           <% end %>
         <% else %>
