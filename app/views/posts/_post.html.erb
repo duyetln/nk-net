@@ -19,6 +19,7 @@
         <%= simple_format h(post.content) %>
       <% end %>
     </div>
+    <%= render :partial => "tags/tags", :locals => {:tags => post.tags} %>
   </div>
   <div class="clear-all"></div>
 </div>
