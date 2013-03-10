@@ -4,7 +4,7 @@
     <div class="owner toolbar">
       <h4><%= link_to comment.user.name, user_path(comment.user) %></h4>
       <% if comment.user == current_user || current_user.admin? %>
-        <%= form_tag comment_path(comment), :method => "DELETE", :class => "tool" do %>
+        <%= form_tag comment_path(comment), :method => :delete, :class => "tool" do %>
           <%= submit_tag "", :type => :image, :src => asset_path("delete.png"), :class => "control", :id => "delete", :title => "Delete This Comment" %>
         <% end %>
       <% else %>

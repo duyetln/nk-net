@@ -1,8 +1,22 @@
-<span class="wrapper tag toolbar">
-  <%= link_to tag.value, tag_path(tag) %>
-  <% if current_user.admin? %>
-    <%= form_tag tag_path(tag), :method => :delete, :class => "tool" do %>
-      <%= submit_tag "", :type => :image, :src => asset_path("delete.png"), :class => "control", :id => "delete", :title => "Delete This Tag" %>
+<table class="tag">
+  <tr>
+    <td>
+      <%= link_to tag.value, tag_path(tag) %>
+    </td>
+    <% if current_user.admin? %>
+      <td class="container" id="edit">
+        <%= image_tag "edit.png", :class => "control", :id => "edit" %>
+        <input type="checkbox" class="toggle"/>
+        <%= form_for :tag, :url => tag_path(tag), :method => :put, :html => {:class => "wrapper edit-tag"} do |f| %>
+          <%= f.text_field :value, :class => "textbox" %>
+          <%= f.submit "Change", :class => "button" %>
+        <% end %>
+      </td>
+      <td>
+        <%= form_tag tag_path(tag), :method => :delete do  %>
+          <%= submit_tag "", :type => :image, :src => asset_path("delete.png"), :class => "control", :id => "delete" %>
+        <% end %>
+      </td>
     <% end %>
-  <% end %>
-</span>
+  </tr>
+</table>
