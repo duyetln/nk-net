@@ -25,9 +25,9 @@ class TagsController < ApplicationController
     @tag = Tag.find(params[:id])
     @tag.attributes = params[:tag]
     if @tag.save
-      redirect_to tag_path(@tag)
+      redirect_to tags_path
     else
-      redirect_to tag_path(@tag)
+      redirect_to tags_path
     end
   end
   

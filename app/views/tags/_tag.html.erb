@@ -1,14 +1,1 @@
-<table class="tag">
-  <tr>
-    <td>
-      <%= link_to tag.value, tag_path(tag) %>
-    </td>
-    <% if current_user.admin? && tagging %>
-      <td>
-        <%= form_tag tagging_path(tagging), :method => :delete do  %>
-          <%= submit_tag "x", :class => "control", :id => "delete" %>
-        <% end %>
-      </td>
-    <% end %>
-  </tr>
-</table>
+<%= link_to tag.value, tag_path(tag), :class => "tag" %>

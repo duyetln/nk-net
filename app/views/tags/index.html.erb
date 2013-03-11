@@ -5,6 +5,31 @@
 <% content_for :rcontent do %>
   <%= render :partial => "tags/tags", :locals => {:tags => @tags} %>
   <% if current_user.admin? %>
+    <% fh = @tags[0..@tags.size/2] %>
+    <% sh = @tags[(@tags.size/2+1)...@tags.size] %>
+    <div class="edit-tags">
+      <% [fh, sh].each do |tags| %>
+        <table>
+        <% tags.each do |tag| %>
+          <tr>  
+            <td id="value"><%= link_to tag.value, tag_path(tag) %></td>
+            <td id="delete">
+              <%= form_tag tag_path(tag), :method => :delete, :class => "wrapper" do %>
+                <%= submit_tag "Remove" %>
+              <% end %>
+            </td>
+            <td id="edit">
+              <%= form_for :tag, :url => tag_path(tag), :method => :put, :html => {:class => "wrapper"} do |f| %>
+                <%= f.text_field :value, :class => "textbox" %>
+                <%= f.submit "Update", :class => "button"%>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </table>
+      <% end %>
+      <div class="clear-all"></div>
+    </div>
     <%= render "tags/new" %>
   <% end %>
   <div class="clear-all"></div>
