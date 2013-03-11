@@ -9,18 +9,18 @@ class TaggingsController < ApplicationController
     @tagging.taggable_type = params[:taggable_type]
       
     if @tagging.save
-      render :nothing => true
+      redirect_to :back
     else
-      render :nothing => true
+      redirect_to :back
     end
   end
   
   def destroy
     @tagging = Tagging.find(params[:id])
     if @tagging.destroy
-      render :nothing => true
+      redirect_to :back
     else
-      render :nothing => true
+      redirect_to :back
     end
   end
 end

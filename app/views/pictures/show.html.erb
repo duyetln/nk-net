@@ -19,8 +19,8 @@
         <% end %>
       </div>
       <div class="content">
-        <%= simple_format h(@picture.description) %>
-        <%= render :partial => "tags/tags", :locals => {:tags => @picture.tags} %>
+        <p><%= simple_format h(@picture.description) %></p>
+        <p><%= render :partial => "taggings/taggings", :locals => {:taggings => @picture.taggings} %></p>
       </div>
       <div class="clear-all"></div>
     </div>
