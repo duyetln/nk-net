@@ -8,8 +8,12 @@
           <%= submit_tag "", :type => :image, :src => asset_path("delete.png"), :class => "control", :id => "delete", :title => "Delete This Post" %>
         <% end %>
       <% else %>
-        <%= image_tag "delete.png", :class => "tool deactivated", :id => "delete" %>
+        <%= image_tag "delete.png", :class => "tool deactivated", :id => "delete" %>     
       <% end %>
+      <% if current_user.admin? %>
+        <%= render :partial => "taggings/new", :locals => {:taggable => post} %>
+      <% end %>
+      
       <div class="clear-all"></div>
     </div>
     <div class="content">

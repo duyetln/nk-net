@@ -17,6 +17,9 @@
         <% else %>
           <%= image_tag "delete.png", :class => "tool deactivated", :id => "delete" %>
         <% end %>
+        <% if current_user.admin? %>
+          <%= render :partial => "taggings/new", :locals => {:taggable => @picture} %>
+        <% end %>
       </div>
       <div class="content">
         <p><%= simple_format h(@picture.description) %></p>

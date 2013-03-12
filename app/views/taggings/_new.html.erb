@@ -1,0 +1,25 @@
+<div class="wrapper new-tagging tool">
+  <%= image_tag "tag.png", :class => "control" %>
+  <% if Tag.any? %>
+    <div class="tag-list">
+      <%= form_tag taggings_path do %>
+        <table>
+          <% Tag.all.each do |tag| %>
+            <tr>
+              <td><%= check_box_tag "tag_ids[]", tag.id, taggable.tags.include?(tag) %></td>
+              <td><%= tag.value %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <td><%= hidden_field_tag :taggable_type, taggable.class.name %></td>
+            <td><%= hidden_field_tag :taggable_id, taggable.id %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%= submit_tag "Tag", :class => "button" %></td>
+          </tr>
+        </table>
+      <% end %>
+    </div>
+  <% end %>
+</div>
