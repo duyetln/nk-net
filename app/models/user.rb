@@ -37,6 +37,9 @@ class User < ActiveRecord::Base
   
   #given a list of roles, determine if a user has ALL of them
   def have_roles?(roles)
+    roles = roles.compact.select{|role| Role.keys.include? role}
+    return false if roles.empty?
+    
     have = true
     roles.each do |role|
       have &&= self.have_role?(role)
