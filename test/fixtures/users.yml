@@ -9,8 +9,8 @@ dn:
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt('123456' + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
   picture_id: ~
-  role: 1
-  status: 2
+  role: <%= User::Role[:regular] %>
+  status: <%= User::Status[:activated] %>
 
 ln:
   id: 2
@@ -21,8 +21,8 @@ ln:
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt('123456' + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
   picture_id: ~
-  role: 2
-  status: 2
+  role: <%= User::Role[:admin] %>
+  status: <%= User::Status[:activated] %>
 
 cn:
   id: 3
@@ -33,5 +33,5 @@ cn:
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt('123456' + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
   picture_id: ~
-  role: 1
-  status: 1
+  role: <%= User::Role[:regular] %>
+  status: <%= User::Status[:new] %>
