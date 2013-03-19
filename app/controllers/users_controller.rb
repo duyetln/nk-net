@@ -59,8 +59,7 @@ class UsersController < ApplicationController
   def update_role
     @user = User.find(params[:id])
     redirect_to user_path(@user) and return unless current_user.admin?
-    params[:roles] = [:regular.to_s] if params[:roles].nil?
-    @user.overwrite_roles(params[:roles].compact.map{|role| role.to_sym})
+    @user.overwrite_roles([User::Role.key(params[:role].to_i)])
     redirect_to user_path(@user)
   end
   
