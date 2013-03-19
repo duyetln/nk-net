@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :rcontent do %>
-  <div class="wrapper">
+  <div class="wrapper taggables">
     <%= render :partial => "posts/posts", :locals => {:posts => @posts} %>
     <%= render :partial => "pictures/pictures", :locals => {:pictures => @pictures} %>
   </div>

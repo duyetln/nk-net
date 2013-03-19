@@ -1,7 +1,7 @@
 <table class="tagging">
   <tr>
     <td>
-      <%= link_to tagging.tag.value, tag_path(tagging.tag) %>
+      <%= render :partial => "tags/tag", :locals => {:tag => tagging.tag} %>
     </td>
     <% if current_user.admin? %>
       <td>

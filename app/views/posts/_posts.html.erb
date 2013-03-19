@@ -1,3 +1,7 @@
 <div class="posts">
-  <%= render posts, :shorten => true %>
+  <% if posts.empty? %>
+    <h3>No Posts Found<h3>
+  <% else %>
+    <%= render posts, :shorten => true %>
+  <% end %>
 </div>

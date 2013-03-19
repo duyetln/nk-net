@@ -1,21 +1,25 @@
-<% first = [] %>
-<% second = [] %>
-<% third = [] %>
-<% fourth = [] %>
-<% pictures.each_slice 4 do |slice| %>
-  <% first << slice[0] unless slice[0].nil? %>
-  <% second << slice[1] unless slice[1].nil? %>
-  <% third << slice[2] unless slice[2].nil? %>
-  <% fourth << slice[3] unless slice[3].nil? %>
-<% end %>
-
 <div class="pictures">
-  <% [first, second, third, fourth].each do |pics| %>
-    <div class="container">
-      <% pics.each do |pic| %>
-        <%= link_to image_tag(pic.item.url(:medium), :class => "thumbnail"), picture_path(pic), :class => "wrapper" %>
-      <% end %>
-    </div>
+  <% if pictures.empty? %>
+    <h3>No Pictures Found<h3>
+  <% else %>
+    <% first = [] %>
+    <% second = [] %>
+    <% third = [] %>
+    <% fourth = [] %>
+    <% pictures.each_slice 4 do |slice| %>
+      <% first << slice[0] unless slice[0].nil? %>
+      <% second << slice[1] unless slice[1].nil? %>
+      <% third << slice[2] unless slice[2].nil? %>
+      <% fourth << slice[3] unless slice[3].nil? %>
+    <% end %>
+
+    <% [first, second, third, fourth].each do |pics| %>
+      <div class="container">
+        <% pics.each do |pic| %>
+          <%= link_to image_tag(pic.item.url(:medium), :class => "thumbnail"), picture_path(pic), :class => "wrapper" %>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="clear-all"></div>    
   <% end %>
-  <div class="clear-all"></div>
 </div>

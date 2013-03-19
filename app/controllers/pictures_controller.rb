@@ -26,9 +26,9 @@ class PicturesController < ApplicationController
     @picture = Picture.find(params[:id])
     
     if (@picture.user == current_user || current_user.admin?) && @picture.destroy
-      render :nothing => true
+      redirect_to pictures_path
     else
-      render :nothing => true
+      redirect_to pictures_path
     end
   end
   
