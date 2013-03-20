@@ -195,14 +195,27 @@ table
 #search-form
 {
   float:left;
+  position:relative;
+  height:26px;
 }
 
 #search-box
 {
-  background:url(<%= asset_path "search.svg" %>) no-repeat 1px 0px white;
-  padding-left:31px;
   width:250px;
   height:16px;
+  padding:4px;
+}
+
+#search-submit
+{
+  width:24px;
+  height:24px;
+  position:absolute;
+  border:1px solid #dcdcdc;
+  top:50%;
+  left:259px;
+  margin-top:-50%;
+  background-color:white;
 }
 
 .control#home, .control#profile
