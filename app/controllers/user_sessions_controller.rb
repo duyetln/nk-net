@@ -9,7 +9,12 @@ class UserSessionsController < ApplicationController
     
     user = @user_session.user
     user.activate if user.deactivated?
-    redirect_to posts_path if user.activated?
+    if user.activated?
+      redirect_to posts_path
+    else
+      @user_session.destroy
+      redirect_to root_path
+    end
   end
   
   def destroy

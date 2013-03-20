@@ -23,7 +23,9 @@ class UsersController < ApplicationController
   
   def edit
     @user = User.find(params[:id])
+    @users = []
     redirect_to user_path(@user) and return unless current_user == @user
+    @users = User.all - [@user] if current_user.admin?
   end
   
   #Visibility Policy:
@@ -52,7 +54,7 @@ class UsersController < ApplicationController
       current_user_session.destroy
       redirect_to root_path
     else
-      redirect_to user_path(@user)
+      redirect_to :back
     end
   end
   
@@ -60,7 +62,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to user_path(@user) and return unless current_user.admin?
     @user.overwrite_roles([User::Role.key(params[:role].to_i)])
-    redirect_to user_path(@user)
+    redirect_to :back
   end
   
   def update_password

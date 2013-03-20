@@ -73,6 +73,14 @@ class User < ActiveRecord::Base
     self.role == 0
   end
   
+  def roles
+    if self.have_no_role? 
+      [:regular]
+    else
+      User::Role.keys.reject{|role| role == :regular}.select{|role| self.have_role?(role)}
+    end
+  end
+  
   def admin?
     self.have_role?(:admin)
   end
